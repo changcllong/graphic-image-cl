@@ -3,8 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const config = require('./webpack.base.config');
 const WebpackMd5Hash = require('webpack-md5-hash');
 
-config.output.filename = './[name]@[chunkhash].js';
-config.output.chunkFilename = './[name]@[chunkhash].js';
+config.output.filename = '[name]@[chunkhash].js';
+config.output.chunkFilename = '[name]@[chunkhash].js';
 
 config.module.rules.push(
     {

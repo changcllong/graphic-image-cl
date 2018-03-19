@@ -23,7 +23,6 @@ config.plugins.push(
 Object.keys(config.entry).forEach(key => {
     config.entry[key].unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true');
 });
-// config.entry.index.unshift('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=10000&reload=true');
 
 config.plugins.push(
     new webpack.DefinePlugin({
