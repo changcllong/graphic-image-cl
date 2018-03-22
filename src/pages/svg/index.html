@@ -16,6 +16,96 @@
     <title>SVG</title>
 </head>
 <body>
-    <div class="app" id="root"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="2000">
+        <defs>
+            <pattern id="Oval" patternUnits="userSpaceOnUse" width="22" height="15" >
+                <g fill="#835" stroke="#006" stroke-width=".7">
+                    <ellipse cx="16" cy="8" rx="4" ry="2" />
+                    <ellipse cx="8" cy="3" rx="4" ry="2" />
+                    <ellipse cx="5" cy="11" rx="4" ry="2" />
+                </g>
+            </pattern>
+        </defs>
+        <rect id="svg-rect" class="cl-svg-rect" x="10" y="10" width="90%" height="180" fill="url(#Oval)"/>
+        <!-- <path d="M80 80 A45 45, 0, 0, 0, 125 125" fill="green" /> -->
+        <g stroke="blue">
+            <g id="g3" fill="none" stroke-width="2">
+               <g id="g2">
+                  <ellipse id="g1" cx="100" cy="100" rx="75" ry="40"/>
+                  <use xlink:href="#g1" transform="rotate(30 100 100)"/>
+                  <use xlink:href="#g1" transform="rotate(60 100 100)"/>
+               </g>
+               <use xlink:href="#g2" transform="rotate(90 100 100)"/>
+            </g>
+        </g>
+        <radialGradient id="gradient1" >
+            <stop offset="0.0" stop-color="black"/>
+            <stop offset="0.5" stop-color="white"/>
+            <stop offset="1" stop-color="black"/>
+        </radialGradient>
+        <clipPath id="CP">
+            <ellipse cx="100" cy="500" rx="100" ry="150"/>
+        </clipPath>
+        <mask id="Ma">
+            <ellipse cx="100" cy="400" rx="70" ry="100" fill="url(#gradient1)"/>
+        </mask>
+        <image xlink:href="../images/test.jpg" y="300" x="10" width="200" height="200" mask="url(#Ma)"/>
+        <defs>
+            <filter id="A" x="0%" y="0%" width="100%" height="100%"><feGaussianBlur stdDeviation="2" /></filter>
+            <filter id="F"><feColorMatrix type="matrix" values="
+                -1  0  0 0 0 
+                0 -1  0 0 0 
+                0  0 -1 0 0 
+                1  1  1 0 0" /></filter>
+            <filter id="edge"><feConvolveMatrix order="3" kernelMatrix="
+                -1 -1 -1
+                -1 7 -1
+                -1 -1 -1" /></filter>
+            <filter id="discrete">
+                <feGaussianBlur stdDeviation="1.5" />
+                <feComponentTransfer>
+                    <feFuncR type="discrete" tableValues="0 .5 1 1"/>
+                    <feFuncG type="discrete" tableValues="0 .5 1"/>
+                    <feFuncB type="discrete" tableValues="0"/>
+                </feComponentTransfer>
+            </filter>
+            <pattern id="pattern" patternUnits="userSpaceOnUse" width="50" height="50">
+                <rect x="0" y="0" width="50" height="50" fill="red" />
+                <rect x="0" y="0" width="25" height="25" fill="black" />
+                <rect x="25" y="25" width="25" height="25" fill="black" />
+            </pattern>
+            <radialGradient id="rg" r=".9">
+                <stop offset="0%" stop-color="#f00"></stop>
+                <stop offset="10%" stop-color="#000"></stop>
+                <stop offset="20%" stop-color="#f00"></stop>
+                <stop offset="30%" stop-color="#000"></stop>
+                <stop offset="40%" stop-color="#f00"></stop>
+                <stop offset="50%" stop-color="#000"></stop>
+                <stop offset="60%" stop-color="#f00"></stop>
+                <stop offset="70%" stop-color="#000"></stop>
+                <stop offset="80%" stop-color="#f00"></stop>
+                <stop offset="90%" stop-color="#000"></stop>
+                <stop offset="100%" stop-color="#f00"></stop>
+            </radialGradient>
+            <rect id="witness" x="0" y="0" width="200" height="200" fill="url(#pattern)"></rect>
+            <filter id="filter-ripple">
+                <feImage result="pict" xlink:href="#witness" ></feImage>
+                <feDisplacementMap in="SourceGraphic" in2="pict" scale="10" xChannelSelector="B" yChannelSelector="G" />
+            </filter>
+            <filter id="d">
+                <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence"/>
+                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="img">
+                <feImage result="pict2" xlink:href="#witness" x="10" y="830" width="200" height="200" ></feImage>
+                <!-- <feImage xlink:href="../images/test.jpg"/> -->
+            </filter>
+        </defs>
+        <g filter="url(#d)">
+            <!-- <rect id="witness0" x="50" y="600" width="200" height="200" fill="url(#img)"></rect> -->
+            <image xlink:href="../images/test.jpg" y="550" x="10" width="200" height="200" />
+        </g>
+        <rect id="witness" x="10" y="830" width="200" height="200" filter="url(#img)"></rect>
+    </svg>
 </body>
 </html>

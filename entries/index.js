@@ -1,5 +1,6 @@
 module.exports = {
     pages: [
-        'svg'
+        'svg',
+        'canvas'
     ]
 }
