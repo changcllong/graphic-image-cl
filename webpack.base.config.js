@@ -16,12 +16,26 @@ const htmlPlugins = [];
 const entries = {};
 
 pages.forEach(pageName => {
+    let htmlName = '',
+        htmlPath = '',
+        jsName = '',
+        jsPath = '';
+    if (typeof pageName === 'string') {
+        htmlName = htmlPath = jsName = jsPath = pageName;
+    } else if (typeof pageName === 'object') {
+        ({
+            htmlName,
+            htmlPath = pageName.htmlName,
+            jsName,
+            jsPath = pageName.jsName
+        } = pageName);
+    }
     htmlPlugins.push(new HTMLWebpackPlugin({
-        filename: `${pageName}.html`,
-        template: path.resolve(SRC_PATH, `./pages/${pageName}/index.html`),
-        chunks: [pageName],
+        filename: `${htmlName}.html`,
+        template: path.resolve(SRC_PATH, `./pages/${htmlPath}/index.html`),
+        chunks: [jsName],
     }));
-    entries[pageName] = [path.resolve(SRC_PATH, `./pages/${pageName}/index.js`)];
+    entries[jsName] = [path.resolve(SRC_PATH, `./pages/${jsPath}/index.js`)];
 });
 
 module.exports = {

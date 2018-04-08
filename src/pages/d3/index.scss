@@ -1,0 +1,64 @@
+@import '../../common/style/index.scss';
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+
+    .dot {
+        fill: white;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+    }
+}
+
+.area {
+    &.above {
+        fill: rgb(252,141,89);
+    }
+  
+    &.below {
+        fill: rgb(145,207,96);
+    }
+
+    &.line {
+        fill: none;
+        stroke: #000;
+        stroke-width: 1.5px;
+    }
+}
+
+.links {
+    .link {
+        fill: none;
+        stroke: #555;
+        stroke-opacity: 0.4;
+        stroke-width: 1.5px;
+    }
+
+    .node {
+        circle {
+            fill: #555;
+        }
+
+        text {
+            font: 10px sans-serif;
+        }
+    }
+
+    .node-leaf {
+        circle {
+            fill: #999;
+        }
+    }
+}
+
+.histogram {
+    & rect{
+        fill: steelblue;
+    }
+    & .bar text {
+        fill: #fff;
+        font: 10px sans-serif;
+    }
+}
